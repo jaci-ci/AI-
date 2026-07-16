@@ -16,8 +16,16 @@ const backendRoutes = [
             path: 'dashboard',
             component: () => import('../views/dashboard.vue'),
             meta:{
-              title:'数据分析',
-              icon:'PieChart'
+              title:'数据看板',
+              icon:'DataAnalysis'
+            }
+        },
+        {
+            path: 'screen',
+            component: () => import('../views/screen.vue'),
+            meta:{
+              title:'数据大屏',
+              icon:'Monitor'
             }
         },
         {
@@ -32,7 +40,7 @@ const backendRoutes = [
           path:'consultations',
           component: () => import('../views/consultations.vue'),
           meta:{
-            title:'咨询记录',
+            title:'对话记录',
             icon:'Message'
           }
         },
@@ -40,7 +48,7 @@ const backendRoutes = [
           path:'emotional',
           component: () => import('../views/emotional.vue'),
           meta:{
-            title:'情绪日志',
+            title:'笔记日志',
             icon:'User'
           }
         },
@@ -92,6 +100,18 @@ const frontendRoutes = [
           path:'knowledge/article/:id',
           component: () => import('../views/articleDetail.vue'),
           props: true
+        },
+        {
+          path:'focus-timer',
+          component: () => import('../views/focusTimer.vue'),
+        },
+        {
+          path:'ai-write',
+          component: () => import('../views/aiWrite.vue'),
+        },
+        {
+          path:'profile',
+          component: () => import('../views/profile.vue'),
         }
     ]
   }

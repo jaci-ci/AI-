@@ -53,13 +53,13 @@ const formData = reactive({
 
 const rules = reactive({
   username: [
-    { required: true, messge: "请输入用户名", trigger: "blur" }
+    { required: true, message: "请输入用户名", trigger: "blur" }
   ],
   email: [
-    { required: true, messge: "请输入邮箱", trigger: "blur" }
+    { required: true, message: "请输入邮箱", trigger: "blur" }
   ],
   password: [
-    { required: true, messge: "请输入密码", trigger: "blur" }
+    { required: true, message: "请输入密码", trigger: "blur" }
   ],
   confirmPassword: [
     { required: true, message: '请确认密码', trigger: 'blur' }
@@ -78,7 +78,7 @@ const submitForm = async (formEl) => {
             ElMessage.success('注册成功')
             router.push('/auth/login')
          }else if(data.code ==='BUSINESS_ERROR'){
-            ELMessage.error(data.message)
+            ElMessage.error(data.message)
          }
           
       })

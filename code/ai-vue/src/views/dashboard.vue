@@ -25,7 +25,7 @@
                             <el-image style="width: 40px; height: 40px;" :src="iconUrl2" alt="用户" />
                         </div>
                         <div class="info">
-                            <p class="title">情绪日志</p>
+                            <p class="title">笔记日志</p>
                             <p class="number">{{ aiData.systemOverview.totalDiaries || 0 }}</p>
                             <p class="subtitle-title">今日新增:{{ aiData.systemOverview.todayNewDiaries || 0 }}</p>
                         </div>
@@ -40,7 +40,7 @@
                             <el-image style="width: 40px; height: 40px;" :src="iconUrl3" alt="用户" />
                         </div>
                         <div class="info">
-                            <p class="title">咨询会话</p>
+                            <p class="title">对话会话</p>
                             <p class="number">{{ aiData.systemOverview.totalSessions || 0 }}</p>
                             <p class="subtitle-title">今日新增:{{ aiData.systemOverview.todayNewSessions || 0 }}</p>
                         </div>
@@ -55,9 +55,9 @@
                             <el-image style="width: 40px; height: 40px;" :src="iconUrl4" alt="用户" />
                         </div>
                         <div class="info">
-                            <p class="title">评价情绪</p>
+                            <p class="title">综合评分</p>
                             <p class="number">{{ aiData.systemOverview.avgMoodScore || 0 }}/10</p>
-                            <p class="subtitle-title">情绪健康指数</p>
+                            <p class="subtitle-title">用户满意度</p>
                         </div>
                     </div>
                 </el-card>
@@ -70,7 +70,7 @@
                 <el-card style="width: 100%;">
                     <template #header>
                         <div class="card-header">
-                            情绪趋势分析
+                            数据趋势分析
                         </div>
                     </template>
                     <div class="chart-content">
@@ -83,7 +83,7 @@
                 <el-card style="width: 100%;">
                     <template #header>
                         <div class="card-header">
-                            咨询会话统计
+                            对话会话统计
                         </div>
                     </template>
                     <div class="chart-content">
@@ -126,7 +126,7 @@
 <script setup>
 /**
  * 仪表盘页面
- * 功能：展示心理健康助手的系统概览、情绪趋势、咨询会话统计和用户活跃度数据
+ * 功能：展示云策 AI · 智能工作平台的系统概览、情绪趋势、咨询会话统计和用户活跃度数据
  */
 import { ref, reactive, toRefs, watch, onMounted } from 'vue'
 // 导入 API 接口：获取分析概览数据

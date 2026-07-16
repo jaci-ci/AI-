@@ -1,11 +1,11 @@
 <template> 
-    <!-- 心理健康知识库主容器 -->
+    <!-- 知识库主容器 -->
     <div class="knowledge-container">
         <!-- 头部区域 - 展示标题和图标 -->
         <div class="header-section">
             <div class="header-content">
                 <el-image :src="iconUrl" alt="知识库"style="width: 60px; height: 60px;"/>
-                <h1>心理健康知识库</h1>
+                <h1>知识库</h1>
             </div>
         </div>
         

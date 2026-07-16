@@ -10,7 +10,7 @@
                     <el-image style="width: 25px; height: 25px;" :src="iconUrl" alt="logo" />
                 </div>
                 <!-- 助手名称 -->
-                <h3 class="assistant-name">心理健康AI助手</h3>
+                <h3 class="assistant-name">AI智能助手</h3>
                 <!-- 在线状态指示 -->
                 <div class="online-status">
                     <div class="status-dot"></div>
@@ -21,7 +21,7 @@
             <div class="emotion-garden">
                 <!-- 情绪花园标题栏 -->
                 <div class="garden-header">
-                    <div class="garden-title">情绪花园</div>
+                    <div class="garden-title">对话洞察</div>
                 </div>
                 <!-- 情绪信息展示 - 圆形情绪指示器 -->
                 <div class="emotion-info">
@@ -130,7 +130,7 @@
                     <!-- 聊天信息 -->
                     <div class="chat-info">
                         <h2>AI健康助手</h2>
-                        <p>您贴心的心理健康助手</p>
+                        <p>您的AI智能助手</p>
                     </div>
                 </div>
                 <!-- 创建新会话按钮 -->
@@ -149,7 +149,7 @@
                     </div>
                     <div class="message-content">
                         <div class="message-bubble">
-                            <p>您好，我是小暖，您的心理助手。很高兴与您互动，今天您想跟我聊些什么？</p>
+                            <p>{{ welcomeMessage }}</p>
                         </div>
                         <div class="message-time">刚刚</div>
                     </div>
@@ -197,6 +197,21 @@
                      @keydown="handleKeyDown"
                      class="message-input">
                     </el-input>
+                    <!-- 语音输入按钮 -->
+                    <el-button
+                      v-if="voiceInput.isSupported.value"
+                      class="voice-btn"
+                      :class="{ recording: voiceInput.isListening.value }"
+                      @click="voiceInput.toggle()"
+                      size="small"
+                      text
+                    >
+                      <el-icon :size="20">
+                        <Microphone v-if="!voiceInput.isListening.value" />
+                        <Close v-else />
+                      </el-icon>
+                      {{ voiceInput.isListening.value ? '停止录音' : '语音输入' }}
+                    </el-button>
                     <!-- 输入框底部提示 -->
                     <div class="input-footer">
                         <span>按Enter发送消息，Shift+Enter换行</span>
@@ -217,6 +232,7 @@
 // 导入Vue组合式API
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 // 导入API接口
+import { useVoiceInput } from '../composables/useVoiceInput'
 import { startSession } from '../api/frontend'
 import { getSessionList, deleteSession, getSessionDetail, getSessionEmotion } from '../api/frontend'
 // 导入Element Plus组件
@@ -234,6 +250,9 @@ const iconUrl = new URL('../assets/images/robot-fill.png', import.meta.url).href
 const iconUrl1 = new URL('../assets/images/like.png', import.meta.url).href
 // 用户头像URL
 const iconUrl2 = new URL('../assets/images/users.png', import.meta.url).href
+
+// 欢迎消息
+const welcomeMessage = '您好，我是云策 AI助手。很高兴与您互动，有什么我可以帮助您的吗？'
 
 
 
@@ -267,6 +286,12 @@ const messages = ref([])
 const userMessage = ref('')
 // AI是否正在回复（响应式）
 const isAiTyping = ref(false)
+
+// 语音输入 — Web Speech API，零依赖语音转文字
+const voiceInput = useVoiceInput({ lang: 'zh-CN', continuous: false })
+watch(() => voiceInput.transcript.value, (val) => {
+  if (val) userMessage.value = val
+})
 
 /**
  * 情绪花园数据（响应式）

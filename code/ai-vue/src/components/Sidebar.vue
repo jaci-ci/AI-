@@ -14,7 +14,7 @@
                 <el-image style="width: 50px; height: 50px; margin-right: 10px;" :src="iconUrl" alt="logo"></el-image>
                 <!-- 品牌信息卡片：折叠状态下隐藏 -->
                 <div v-show="!isCollapse" class="info-card">
-                    <h1 class="brand.title">心理健康AI助手</h1>
+                    <h1 class="brand.title">云策 AI</h1>
                     <p class="brand.subtile">管理后台</p>
                 </div>
             </div>

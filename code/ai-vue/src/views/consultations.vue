@@ -1,19 +1,19 @@
 <template>
-    <!-- 咨询记录页面 -->
+    <!-- 对话记录页面 -->
     <div class="consultations-wrapper">
         <!-- 页面头部组件 -->
-        <PageHead title="咨询记录" />
-        
-        <!-- 咨询会话列表表格 -->
+        <PageHead title="对话记录" />
+
+        <!-- 对话会话列表表格 -->
         <el-table :data="tableData" style="width: 100%">
-            <!-- 会话ID列 - 显示用户昵称头像 -->
-            <el-table-column label="会话ID" prop="createTime" width="100">
+            <!-- 用户列 -->
+            <el-table-column label="用户" width="100">
                 <template #default="scope">
                     <el-avatar>{{scope.row.userNickname}}</el-avatar>
                 </template>
             </el-table-column>
-            <!-- 情绪日志列 - 显示会话标题和最后消息预览 -->
-            <el-table-column label="情绪日志">
+            <!-- 会话信息列 -->
+            <el-table-column label="会话信息">
                 <template #default="scope">
                     <div class="session-title">{{scope.row.sessionTitle}}</div>
                     <div class="session-preview">{{scope.row.lastMessageContent}}</div>
@@ -43,7 +43,7 @@
         <!-- 会话详情弹窗 -->
         <el-dialog 
         v-model="showDetailDialog"
-        title="咨询会话详情"
+        title="会话详情"
         width="70%"
         :close-on-click-modal="false"
         >

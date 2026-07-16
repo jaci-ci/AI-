@@ -1,0 +1,17 @@
+{
+  "name": "云策 AI · 智能工作平台",
+  "short_name": "云策 AI",
+  "description": "AI驱动的个人效率与知识管理平台",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#2563EB",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

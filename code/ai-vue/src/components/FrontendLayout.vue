@@ -3,14 +3,31 @@
         <div class="navbar-container">
             <div class="brand-section">
                 <el-image style="width: 50px; height: 50px;" :src="iconUrl" alt="logo" class="brand-logo" />
-                <h1 class="brand-name">心理健康AI助手</h1>
+                <h1 class="brand-name">云策 AI</h1>
             </div>
             <div class="nav-section">
                 <router-link to="/" class="nav-link">首页</router-link>
-                <router-link to="/consultation" class="nav-link" v-if="isLoggedin">AI咨询</router-link>
-                <router-link to="/emotion-diary" class="nav-link" v-if="isLoggedin">情绪日记</router-link>
+                <router-link to="/consultation" class="nav-link" v-if="isLoggedin">智能对话</router-link>
+                <router-link to="/emotion-diary" class="nav-link" v-if="isLoggedin">随手记</router-link>
                 <router-link to="/knowledge" class="nav-link">知识库</router-link>
-                <el-button class="logout-btn" v-if="isLoggedin" @click="handleLogout">退出登录</el-button>
+                <router-link to="/focus-timer" class="nav-link" v-if="isLoggedin">专注计时</router-link>
+                <router-link to="/ai-write" class="nav-link" v-if="isLoggedin">AI写作</router-link>
+                <!-- 用户菜单 -->
+                <template v-if="isLoggedin">
+                    <el-dropdown @command="handleUserCommand" trigger="click">
+                        <el-avatar :size="32" :src="userAvatar" class="user-avatar-nav" />
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item command="profile">
+                                    <el-icon><User /></el-icon> 个人中心
+                                </el-dropdown-item>
+                                <el-dropdown-item command="logout" divided>
+                                    <el-icon><SwitchButton /></el-icon> 退出登录
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                </template>
                 <template v-else>
                     <router-link to="/auth/login" class="nav-link">登录</router-link>
                     <router-link to="/auth/register" class="nav-link">
@@ -24,37 +41,52 @@
         </div>
         <div class="footer-container">
             <div class="footer-bottom">
-                <p>&copy;心理健康AI助手 2026</p>
+                <p>&copy; 云策 AI · 智能工作平台 2026</p>
             </div>
         </div>
     </div>
 </template>
 <script setup>
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { logout } from '../api/admin'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-
 const iconUrl = new URL('../assets/images/机器人.png', import.meta.url).href
 
 const isLoggedin = ref(false)
+const userInfo = ref({})
+
+const userAvatar = computed(() => {
+  return userInfo.value.avatar || 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+})
+
+// 用户菜单命令
+const handleUserCommand = (command) => {
+  if (command === 'profile') {
+    router.push('/profile')
+  } else if (command === 'logout') {
+    handleLogout()
+  }
+}
 
 //登出
 const handleLogout = () => {
     logout().then(() => {
-        //清除token和userInfo
         localStorage.removeItem('token')
         localStorage.removeItem('userInfo')
-        // 退出登录后，跳转到登录页
         router.push('/auth/login')
     })
 }
 
 onMounted(() => {
     isLoggedin.value = localStorage.getItem('token') !== null
+    const stored = localStorage.getItem('userInfo')
+    if (stored) {
+        try { userInfo.value = JSON.parse(stored) } catch {}
+    }
 })
 
 </script>
@@ -94,7 +126,7 @@ onMounted(() => {
                 font-weight: 500;
 
                 &:hover {
-                    color: #4A90E2;
+                    color: var(--color-primary);
                 }
             }
         }

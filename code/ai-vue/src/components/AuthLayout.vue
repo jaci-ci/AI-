@@ -2,10 +2,10 @@
     <div class="auth-layout">
         <div class="left-section">
             <div class="content">
-                <h2 class="title">心理AI助手</h2>
-                <p class="text">每个深夜，每个焦虑的时刻，我们都在这里，不要独自承受，让心与心的连接温暖您的每一天</p>
+                <h2 class="title">云策 AI</h2>
+                <p class="text">智能对话，高效生活。AI驱动的个人效率与知识管理平台，让每一天都更加从容</p>
                 <div class="robot">
-                    <el-image style="width: 90px; height: 90px;" :src="iconUrl" alt="心理AI助手" />
+                    <el-image style="width: 90px; height: 90px;" :src="iconUrl" alt="云策 AI" />
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@ const iconUrl = new URL('@/assets/images/robot-fill.png', import.meta.url).href
         justify-content: center;
         align-items: center;
         flex: 1;
-        background: linear-gradient(90deg, rgb(74, 156, 140) 0%, rgb(61, 138, 122) 100%) rgba(74, 156, 140, 0.95);
+        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #6366F1 100%);
         height: 100vh;
 
         .content {

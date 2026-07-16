@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PageHead title="情绪日志" />
+        <PageHead title="笔记记录" />
         <TableSearch :formItem="formItem" @search="handleSearch" />
         <el-table :data="tableData" style="width: 100%">
             <el-table-column label="用户 ID" prop="id" width="80"/>
@@ -10,7 +10,7 @@
             </template>
             </el-table-column>
             <el-table-column label="记录日期" prop="diaryDate" width="120"></el-table-column>
-            <el-table-column label="情绪评分">
+            <el-table-column label="评分">
                 <template #default="scope">
                     <el-rate :model-value="scope.row.moodScore" :max="10" disabled />
                 </template>
@@ -23,7 +23,7 @@
                    </div>
                 </template>
             </el-table-column>
-             <el-table-column label="情绪触发因素" prop="emotionalTriggers" width="120"></el-table-column>
+             <el-table-column label="内容摘要" prop="emotionalTriggers" width="120"></el-table-column>
               <el-table-column label="日记内容" prop="diaryContent" width="250"></el-table-column>
               <el-table-column label="操作" width="240px" fixed="right">
                 <template #default="scope">
@@ -42,7 +42,7 @@
 
         <el-dialog
         v-model="dialogVisible"
-        title="情绪日志详情"
+        title="笔记详情"
         width="800px"
         :close-on-click-modal="false"
         >
